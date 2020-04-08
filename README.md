@@ -19,4 +19,5 @@ A 13x13 grid is initialized with edible cheese (red) and poisonous cheese (blue)
 
 ## 3. Results
 - The Q-value neural network is then trained for several episodes and here are some winning games achieved by an agent that choose actions according to this Q-value function.
-![win](https://user-images.githubusercontent.com/34350063/78797480-09962680-79b8-11ea-87b9-0148a3e3d75a.gif)
+
+ <img src="https://user-images.githubusercontent.com/34350063/78797480-09962680-79b8-11ea-87b9-0148a3e3d75a.gif" width="400" height="400">
