@@ -17,7 +17,7 @@ This project is an exercice from the [MVA](http://math.ens-paris-saclay.fr/versi
 
 ## 2. Deep Q-Learning approach
 - The rat (agent) will learn what is the best action to take in a given state according to the value of a Q-value function. 
-- The Q-value function takes as inputs a state S and an action A and output a value representing the expected culmunative reward throughout the game for taking the specific action A when the state was S. Given a state S, the rat have to choose the action A that maximize this Q-value function.
+- The Q-value function takes as inputs a state **S** and an action **A** and output a value representing the expected culmunative reward throughout the game for taking the specific action **A** when the state was **S**. Given a state **S**, the rat have to choose the action **A** that maximize this Q-value function.
 - The Q-value function will be modeled by a neural network, it will take as input a state and output 4 values, one for each of the available actions.
 
  <img src="https://user-images.githubusercontent.com/34350063/78794756-6d1e5500-79b4-11ea-95a5-bed351dd091a.png" width="500" height="300">
