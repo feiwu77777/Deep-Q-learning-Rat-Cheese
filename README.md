@@ -10,10 +10,16 @@ This project is an exercice from the [MVA](http://math.ens-paris-saclay.fr/versi
 ## 1. Game Rules
 - A 13x13 grid is initialized with edible cheese (red) and poisonous cheese (blue). 
 - A rat (white) has to collect all the edible cheese by avoiding as much as possible the poisonous ones (he can still eat some). 
+
+ <img src="https://user-images.githubusercontent.com/34350063/78794965-b1115a00-79b4-11ea-8b01-c1cdd2c21d96.png" width="250" height="250">
+
+- The rat can only see as far as 2 cells, he needs to explore the environment to find all the cheese.
+
+ <img src="https://user-images.githubusercontent.com/34350063/78923920-3c641b80-7a99-11ea-920d-1aedf4eb4354.png" width="150" height="150">
+
 - There is a time limit after which the game is over, the rat can move by one cell (up, down , left, right) at each step. 
 - The score of a game (initially 0) is udpated with the following rule: collecting an edible cheese grants 0.5 point and collecting a poisonous one takes off 1 point.
 
- <img src="https://user-images.githubusercontent.com/34350063/78794965-b1115a00-79b4-11ea-8b01-c1cdd2c21d96.png" width="250" height="250">
 
 ## 2. Deep Q-Learning Approach
 - The rat (agent) will learn what is the best action to take in a given state according to the value of a Q-value function. 
