@@ -3,9 +3,9 @@
 This project is an exercice from the [MVA](http://math.ens-paris-saclay.fr/version-francaise/formations/master-mva/) course, more specifically the [course](https://www.labri.fr/perso/vlepetit/deep_learning_mva.php) about Reinforcement Learning (lecture 4 and the mini-project) taught by [Vincent Lepetit](https://www.labri.fr/perso/vlepetit/index.php).
 
 ***Summary***
-1. Game Rules
-2. Deep Q-Learning Approach
-3. Results
+1. [Game Rules](https://github.com/feiwu77777/Deep-Q-learning-Rat-Cheese#1-game-rules)
+2. [Deep Q-Learning Approach](https://github.com/feiwu77777/Deep-Q-learning-Rat-Cheese#2-deep-q-learning-approach)
+3. [Results](https://github.com/feiwu77777/Deep-Q-learning-Rat-Cheese#3-results)
 
 ## 1. Game Rules
 - A 13x13 grid is initialized with edible cheese (red) and poisonous cheese (blue). 
