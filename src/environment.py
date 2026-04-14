@@ -102,3 +102,54 @@ class Environment:
         if dirname:
             os.makedirs(dirname, exist_ok=True)
         skvideo.io.vwrite(path + ".mp4", self.to_draw[:self.t])
+
+
+class EnvironmentExploring(Environment):
+    """Environment that penalises revisiting cells to encourage exploration.
+
+    Adds a malus_position grid that decrements by 0.1 each time the rat
+    lands on a cell. During training this penalty is added to the reward.
+
+    State channels (axis 0):
+        0 — malus view: starts at 0, decreases -0.1 per visit
+        1 — board view: +0.5 edible, -1.0 poisonous, 0 empty
+        2 — position view: -1 walls, 0 empty, +1 rat
+    """
+
+    def reset(self):
+        super().reset()  # sets self.x, self.y, self.board, self.t
+        self.malus_position = np.zeros((self.grid_size, self.grid_size), dtype=np.float32)
+        self.malus_position[self.x, self.y] = -0.1
+        return self._make_exploring_state()
+
+    def _make_exploring_state(self):
+        malus_view = self.malus_position[self.x - 2:self.x + 3, self.y - 2:self.y + 3].copy()
+        board_view = self.board[self.x - 2:self.x + 3, self.y - 2:self.y + 3].copy()
+        pos_view = self._make_position()[self.x - 2:self.x + 3, self.y - 2:self.y + 3]
+        return np.stack([malus_view, board_view, pos_view], axis=0).astype(np.float32)
+
+    def act(self, action: int, train: bool = False):
+        self.get_frame(self.t)
+
+        if action == 0:
+            self.x = self.x - 1 if self.x == self.grid_size - 3 else self.x + 1
+        elif action == 1:
+            self.x = self.x + 1 if self.x == 2 else self.x - 1
+        elif action == 2:
+            self.y = self.y - 1 if self.y == self.grid_size - 3 else self.y + 1
+        elif action == 3:
+            self.y = self.y + 1 if self.y == 2 else self.y - 1
+
+        cheese_reward = float(self.board[self.x, self.y])
+        self.board[self.x, self.y] = 0.0
+
+        if train:
+            reward = cheese_reward + float(self.malus_position[self.x, self.y])
+        else:
+            reward = cheese_reward
+
+        self.malus_position[self.x, self.y] -= 0.1
+        self.t += 1
+        game_over = bool(self.t > self.max_time)
+
+        return self._make_exploring_state(), reward, game_over
