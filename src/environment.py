@@ -43,6 +43,10 @@ class Environment:
                                            size=(self.grid_size, self.grid_size)).astype(np.float32)
         malus[bonus > 0] = 0.0
         self.board = (bonus + malus).astype(np.float32)
+        self.board[0:2, :] = 0.0
+        self.board[-2:, :] = 0.0
+        self.board[:, 0:2] = 0.0
+        self.board[:, -2:] = 0.0
         self.board[self.x, self.y] = 0.0  # clear rat's starting cell
 
         return self._make_state()
@@ -129,7 +133,8 @@ class EnvironmentExploring(Environment):
         return np.stack([malus_view, board_view, pos_view], axis=0).astype(np.float32)
 
     def act(self, action: int, train: bool = False):
-        self.get_frame(self.t)
+        if self.t < len(self.to_draw):
+            self.get_frame(self.t)
 
         if action == 0:
             self.x = self.x - 1 if self.x == self.grid_size - 3 else self.x + 1

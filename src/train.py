@@ -30,6 +30,10 @@ def train(cfg: dict) -> None:
     ac = cfg["agent"]
     tc = cfg["train"]
 
+    assert ac["n_state"] == 3, (
+        f"train.py uses EnvironmentExploring which requires n_state=3, got {ac['n_state']}"
+    )
+
     os.makedirs(tc["model_dir"], exist_ok=True)
     os.makedirs(tc["video_dir"], exist_ok=True)
 
