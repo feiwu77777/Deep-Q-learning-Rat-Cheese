@@ -1,0 +1,26 @@
+env:
+  grid_size: 13
+  max_time: 200
+  temperature: 0.3
+
+agent:
+  epsilon_start: 1.0
+  epsilon_end: 0.01
+  decay_rate: 0.001
+  memory_size: 2000
+  batch_size: 32
+  lr: 0.1
+  discount: 0.99
+  n_state: 3  # 2 for base Environment, 3 for EnvironmentExploring
+
+train:
+  epochs: 50
+  video_every: 10
+  model_dir: model/
+  video_dir: video/train/
+
+test:
+  epochs: 5
+  epsilon: 0.1
+  model_dir: model/
+  video_dir: video/test/
