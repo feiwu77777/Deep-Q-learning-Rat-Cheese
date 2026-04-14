@@ -72,7 +72,7 @@ class DQN:
         next_states = torch.FloatTensor(np.array([b[1] for b in batch]))  # (B, n_state, 5, 5)
         actions = [b[2] for b in batch]
         rewards = [b[3] for b in batch]
-        dones = [b[4] for b in batch]
+        game_overs = [b[4] for b in batch]
 
         q_values = self.model(states)  # (B, 4)
 
@@ -81,7 +81,7 @@ class DQN:
 
         targets = q_values.detach().clone()
         for i in range(self.batch_size):
-            if dones[i]:
+            if game_overs[i]:
                 targets[i, actions[i]] = rewards[i]
             else:
                 targets[i, actions[i]] = rewards[i] + self.discount * next_q_max[i].item()

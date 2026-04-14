@@ -70,11 +70,11 @@ class Environment:
         if self.t < len(self.to_draw):
             self.get_frame(self.t)
 
-        if action == 0:
+        if action == 0: # down
             self.x = self.x - 1 if self.x == self.grid_size - 3 else self.x + 1
-        elif action == 1:
+        elif action == 1: # up
             self.x = self.x + 1 if self.x == 2 else self.x - 1
-        elif action == 2:
+        elif action == 2: # right
             self.y = self.y - 1 if self.y == self.grid_size - 3 else self.y + 1
         elif action == 3:
             self.y = self.y + 1 if self.y == 2 else self.y - 1
